@@ -1,32 +1,37 @@
-/* user and group to drop privileges to */
-static const char *user  = "nobody";
-static const char *group = "nogroup";
+// user and group to drop privileges to
+static const char *user  = "mc";
+static const char *group = "mc";
 
+// color name
 static const char *colorname[NUMCOLS] = {
-    [INIT] = "black",       /* after initialization */
-    [INPUT] = "#005577",    /* during input */
-	[FAILED] = "#CC3333",   /* wrong password */
-    [CAPS] = "red",         /* CapsLock on */
+    [INIT]   = "black",
+    [INPUT]  = "#005577",
+	[FAILED] = "#CC3333",
+    [CAPS]   = "red",
 };
 
-/*
- * Xresources preferences to load at startup
- */
-ResourcePref resources[] = {
-       { "color0",       STRING,  &colorname[INIT] },
-       { "color4",       STRING,  &colorname[INPUT] },
-       { "color1",       STRING,  &colorname[FAILED] },
-       { "color3",       STRING,  &colorname[CAPS] },
-};
+// treat cleared input like wrong password (color)
+static int failonclear = 1;
 
-/* treat a cleared input like a wrong password (color) */
-static const int failonclear = 1;
-
-/* default message */
+// default message
 static const char * message = "Suckless: Software that sucks less.";
 
-/* text color */
+// text color
 static const char * text_color = "#ffffff";
 
-/* text size (must be a valid size) */
-static const char * font_name = "sans-serif:size:pixelsize=24:antialias=true:autohint=true";
+// text size (must be a valid size)
+static const char * font_name = "sans-serif:pixelsize=24:antialias=true:autohint=true";
+
+// xresources
+ResourcePref resources[] = {
+       { "user",        STRING,  &user              },
+       { "group",       STRING,  &group             },
+       { "init",        STRING,  &colorname[INIT]   },
+       { "input",       STRING,  &colorname[INPUT]  },
+       { "failed",      STRING,  &colorname[FAILED] },
+       { "caps",        STRING,  &colorname[CAPS]   },
+       { "failonclear", INTEGER, &failonclear       },
+       { "message",     STRING,  &message           },
+       { "text_color",  STRING,  &text_color        },
+       { "font_name",   STRING,  &font_name         },
+};
